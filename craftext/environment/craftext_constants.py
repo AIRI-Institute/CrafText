@@ -1,9 +1,11 @@
 from enum import Enum
 import os
 from flax import struct
+from pathlib import Path
 
-base_path = os.getenv("CRAFTEXT_SCENARIO_PATH", "../dataset/scenarious")
-plans_path = os.path.join(base_path, "extra_files", "easy_gpt4_action_plans.json")
+current_path = Path(__file__)
+craftext_root = current_path.parent.parent
+plans_path = os.path.join(craftext_root, "dataset", "scenarious", "extra_files", "easy_gpt4_action_plans.json")
 
 @struct.dataclass
 class AchievementState:

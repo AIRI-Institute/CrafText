@@ -16,10 +16,8 @@ class DistilBertEncode:
         self.form_to_use = form_to_use
         model_name = "distilbert-base-uncased"
         self.tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=".")
-        self.model = AutoModel.from_pretrained(model_name, cache_dir=".").cuda()
+        self.model = AutoModel.from_pretrained(model_name, cache_dir=".")
         self.n_splits=n_splits
-        if self.n_splits>1:
-            exit()
         self.stopwords = {"a", "an", "the", "in", "on", "at", "by", "to", "for", "of", "with", "and", "or", "but", "so"}  
 
     def encode(self, instruction):
@@ -78,7 +76,7 @@ class DistilBertEncode:
                 truncation=True, 
                 padding=True, 
                 max_length=50
-            ).to("cuda")
+            )
         
         with torch.no_grad():
                 outputs = self.model(**inputs)
