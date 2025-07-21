@@ -15,11 +15,12 @@ from craftext.environment.scenarious.checkers.target_state import BuildLineState
 from craftext.environment.scenarious.checkers.lines import check_line_2, check_line_3, check_line_4
 
 from flax.struct import dataclass
+from functools import partial
 
 def checker_line(game_data: Union[GameDataClassic, GameData],  target_state: BuildLineState) -> jax.Array:
     
     block_index = target_state.block_type
-    radius = target_state.radius
+    radius = 10
     size = target_state.size
     check_diagonal = target_state.is_diagonal
 
@@ -33,6 +34,7 @@ class Carry:
     size: int
     check_diagonal: bool
 
+@partial(jax.jit, static_argnames=['radius'])
 def is_line_formed(game_data: Union[GameDataClassic, GameData], block_index: int, radius: int, length: int, check_diagonal: bool) -> jax.Array:
     
     # Extract the raw game map and convert to binary mask for the given block_index.

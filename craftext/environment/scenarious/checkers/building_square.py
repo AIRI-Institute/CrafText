@@ -17,6 +17,7 @@ from craftext.environment.scenarious.checkers.squeres import (
     check_square_3x3, 
     check_square_4x4
 )
+from functools import partial
 
 @dataclass
 class Carry:
@@ -27,11 +28,13 @@ class Carry:
 def checker_square(game_data: Union[GameDataClassic, GameData],  target_state: BuildSquareState) -> jax.Array:
     
     block_index = target_state.block_type
-    radius = target_state.radius
+    radius = 10
     size = target_state.size
 
     return is_square_formed(game_data, block_index, radius, size)
 
+
+@partial(jax.jit, static_argnames=['radius'])
 def is_square_formed(game_data: Union[GameDataClassic, GameData], block_index: int, radius: int, size: int) -> jax.Array:
 
      # Extract the full game map and convert to a binary mask for block_index.

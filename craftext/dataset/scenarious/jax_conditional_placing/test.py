@@ -1,5 +1,5 @@
 from craftext.environment.scenarious.checkers.target_state import TargetState, ConditionalPlacingState
-from craftext.environment.craftext_constants import InventoryItems, BlockType, hardInventoryItems, Scenarios
+from craftext.environment.craftext_constants import InventoryItems, BlockType, Scenarios
 
 
 def create_target_state(object_inventory_enum, object_to_place, count_to_collect, count_to_stand):
