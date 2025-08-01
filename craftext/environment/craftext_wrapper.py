@@ -273,6 +273,7 @@ class InstructionDoneActionWrapper(InstructionWrapper):
         encode_model_class=DistilBertEncode,
         encode_form=EncodeForm.EMBEDDING,
     ) -> None:
+    
         super().__init__(
             env=env,
             config_name=config_name,
@@ -281,7 +282,7 @@ class InstructionDoneActionWrapper(InstructionWrapper):
             encode_form=encode_form,
         )
         
-        self.skip_action_id = 18
+        self.skip_action_id = 17
 
     def step(self, _rng, env_state, action, env_params):
 
@@ -315,7 +316,7 @@ class InstructionDoneActionWrapper(InstructionWrapper):
             operand=reward,
         )
 
-        done = jnp.logical_or(jnp.logical_and(instruction_done, is_skip_action), done)
+        done = jnp.logical_or(is_skip_action, done)
 
         new_episode_sr = env_state.success_rate + jnp.float32(
             instruction_done & is_skip_action

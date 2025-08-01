@@ -29,7 +29,7 @@ medium_test_parafrased = {
     **build_line_instructions.medium_test_parafrased,
     **build_square_instructions.medium_test_parafrased,
     **conditional_place_instructions.medium_test_parafrased,
-    **conditional_achievements_instructions.medium_test_parafrased,
+    **conditional_achievements_instructions.easy_test_parafrased,
     **localization_place_instructions.medium_test_parafrased,
 }
 
@@ -39,6 +39,6 @@ medium_test_other_paramets = {
     **build_line_instructions.medium_test_other_paramets,
     **build_square_instructions.medium_test_other_paramets,
     **conditional_place_instructions.medium_test_other_paramets,
-    **conditional_achievements_instructions.medium_test_other_paramets,
+    **conditional_achievements_instructions.easy_test_other_paramets,
     **localization_place_instructions.medium_test_other_paramets,
 }
