@@ -340,3 +340,76 @@ class InstructionDoneActionWrapper(InstructionWrapper):
         self.steps += 1
         return obs, state, reward, done, info
 
+
+
+class SoftInstructionDoneActionWrapper(InstructionWrapper):
+    def __init__(
+        self,
+        env,
+        config_name=None,
+        scenario_handler_class=ScenariosNoLambda,
+        encode_model_class=DistilBertEncode,
+        encode_form=EncodeForm.EMBEDDING,
+    ) -> None:
+    
+        super().__init__(
+            env=env,
+            config_name=config_name,
+            scenario_handler_class=scenario_handler_class,
+            encode_model_class=encode_model_class,
+            encode_form=encode_form,
+        )
+        
+        self.skip_action_id = 17
+
+    def step(self, _rng, env_state, action, env_params):
+
+        is_skip_action = action == self.skip_action_id
+
+        action_for_env = jax.lax.cond(is_skip_action, lambda: 0, lambda: action)
+
+        obs, state, reward, done, info = self.env.step(
+            _rng, env_state.env_state, action_for_env, env_params
+        )
+
+        game_data_vector = self.StateStructure.from_state(
+            env_state.env_state, state, action
+        )
+
+        ts = self.batched_ts.select(env_state.idx)
+
+        instruction_done = generic_check(game_data_vector, ts, env_state.checker_id)
+
+        reward = jax.lax.cond(
+            # jnp.logical_and(instruction_done, is_skip_action),
+            instruction_done,
+            lambda r: 1.0,
+            lambda r: 0.0,
+            operand=reward,
+        )
+
+        # done = jnp.logical_or(is_skip_action, done)
+
+        new_episode_sr = env_state.success_rate + jnp.float32(
+            # instruction_done & is_skip_action
+            instruction_done
+        )
+
+        state = TextEnvState(
+            env_state=state,
+            timestep=state.timestep,
+            instruction=env_state.instruction,
+            idx=env_state.idx,
+            environment_key=env_state.environment_key,
+            success_rate=new_episode_sr * (1 - done),
+            total_success_rate=env_state.total_success_rate * (1 - done)
+            + new_episode_sr * done,
+            rng=env_state.rng,
+            instruction_done=instruction_done,
+            checker_id=env_state.checker_id,
+        )
+
+        info.update({"SR": state.total_success_rate, "steps": self.steps})
+        self.steps += 1
+        return obs, state, reward, done, info
+
