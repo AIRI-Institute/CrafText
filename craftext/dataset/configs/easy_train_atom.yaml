@@ -1,0 +1,6 @@
+dataset_key: jax_conditional_achievements_atom
+subset_key: easy
+base_environment: Craftax-Classic-Pixels-v1-Text
+use_parafrases: True
+test: False
+
