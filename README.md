@@ -102,9 +102,11 @@ All possible configs you can find in `craftext/dataset/config`
 If you use CrafText in your research, please cite:
 
 ```bibtex
-@article{volovikova2025craftext,
-  title={CrafText Benchmark: Advancing Instruction Following in Complex Multimodal Open-Ended World},
-  author={Volovikova, Zoya and Gorbov, Gregory and Kuderov, Petr and Panov, Aleksandr I and Skrynnik, Alexey},
-  journal={arXiv preprint arXiv:2505.11962},
+@inproceedings{volovikova2025craftext,
+  title={Craftext benchmark: Advancing instruction following in complex multimodal open-ended world},
+  author={Volovikova, Zoya and Gorbov, Gregory and Kuderov, Petr and Panov, Aleksandr and Skrynnik, Alexey},
+  booktitle={Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={26131--26151},
   year={2025}
 }
+```
