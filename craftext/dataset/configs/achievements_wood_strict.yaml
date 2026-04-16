@@ -1,0 +1,5 @@
+dataset_key: jax_achievements_wood
+subset_key: easy
+base_environment: Craftax-Classic-Pixels-v1-Text
+use_parafrases: True
+
