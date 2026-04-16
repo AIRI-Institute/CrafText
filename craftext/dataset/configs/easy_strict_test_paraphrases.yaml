@@ -1,6 +1,5 @@
-dataset_key: SMALL
+dataset_key: jax_conditional_achievements_reward_progression
 subset_key: easy_test_paraphrased
 base_environment: Craftax-Classic-Pixels-v1-Text
 use_parafrases: True
 test: True
-

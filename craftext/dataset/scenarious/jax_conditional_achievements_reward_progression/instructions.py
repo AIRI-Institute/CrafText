@@ -4,10 +4,13 @@ from craftext.environment.craftext_constants import Achievement, Scenarios, Achi
 
 def create_target_state(required=[], forbidden=[]):
     base_vector = [AchievementState.NOT_MATTER for i in range(Achievement.MAKE_IRON_SWORD + 1)]
+    max_required = max(required)
     for i in range(len(base_vector)):
         if i in required:
             base_vector[i] = AchievementState.NEED_TO_ACHIEVE
         elif i in forbidden:
+            base_vector[i] = AchievementState.AVOID_TO_ACHIEVE
+        if i > max_required:
             base_vector[i] = AchievementState.AVOID_TO_ACHIEVE
     target_achievements = Achievements(achievement_mask=tuple(base_vector))
     return TargetState(achievements=target_achievements)

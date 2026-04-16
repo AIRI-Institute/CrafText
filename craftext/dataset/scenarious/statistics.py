@@ -53,8 +53,8 @@ def process_folders(base_folder):
                     module_name = f"{folder_name}_test"
                     test_module = import_module_from_path(module_name, test_path)
                     dict_names = [
-                        "easy_test_parafrased",
-                        "easy_test_other_paramets",
+                        "easy_test_paraphrased",
+                        "easy_test_other_params",
                         "medium_test_parafrased",
                         "medium_test_other_paramets",
                     ]

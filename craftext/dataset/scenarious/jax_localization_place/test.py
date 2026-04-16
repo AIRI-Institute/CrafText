@@ -5,7 +5,7 @@ def create_target_state(object_inventory_enum, object_to_place, count_to_collect
     target_achievements = LocalizaPlacingState(object_inventory_enum, object_to_place, count_to_collect, count_to_stand)
     return TargetState(Localization_placing=target_achievements)
 
-easy_test_parafrased = {
+easy_test_paraphrased = {
   "INSTRUCTION_PLACE_STONE_LEFT_OF_FURNACE_1_1": {
     "instruction": "Place a stone one block to the left of the furnace.",
     "scenario_checker": Scenarios.LOCALIZATION_PLACE,
@@ -269,7 +269,7 @@ easy_test_parafrased = {
 }
 
 
-easy_test_other_paramets = {
+easy_test_other_params = {
     "INSTRUCTION_PLACE_FURNACE_GRASS_0_5": {
         "instruction": "Place the furnace five squares to the right of the grass.",
         "instruction_paraphrases": [
